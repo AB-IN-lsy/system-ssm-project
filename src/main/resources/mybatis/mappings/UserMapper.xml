@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="com.mapper.UserMapper">
+	<sql id="cols">
+	    user_id, user_name, user_pass, user_nickname, user_email, user_url, user_avatar, 
+	    user_last_login_ip, user_register_time, user_last_login_time, user_status
+	</sql>
+	
+	<select id="loginByNameOrEmail" parameterType="string" resultType="User">
+	    select  <include refid="cols" /> from user where user_name=#{s} or user_email=#{s} and user_status>0  limit 1	
+	</select>
+</mapper>
