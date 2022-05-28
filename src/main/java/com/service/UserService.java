@@ -1,4 +1,5 @@
 package com.service;
+
 import com.entity.User;
 
 /**
@@ -7,6 +8,7 @@ import com.entity.User;
 public interface UserService {
 	/**
 	 * 根据用户名或邮箱登录
+	 * 
 	 * @param s 账号或邮箱
 	 * @return 用户信息
 	 */
