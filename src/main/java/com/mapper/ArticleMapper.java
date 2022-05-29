@@ -13,4 +13,12 @@ public interface ArticleMapper {
 	 */
 	List<Article> listRecentArticle(Integer n);
 
+	/**
+	 * ²éÑ¯ÎÄÕÂid
+	 * 
+	 * @param commetArticleId
+	 * @return
+	 */
+	Article getArticleById(int commetArticleId);
+
 }

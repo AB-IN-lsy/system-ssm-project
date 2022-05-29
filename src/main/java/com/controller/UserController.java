@@ -9,18 +9,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.entity.Article;
+import com.entity.Comment;
 import com.entity.User;
 import com.service.ArticleService;
+import com.service.CommentService;
 import com.service.UserService;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
 	@Autowired
-	UserService userService;
+	private UserService userService;
 
 	@Autowired
-	ArticleService articleService;
+	private ArticleService articleService;
+
+	@Autowired
+	private CommentService CommentService;
 
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request) {
@@ -46,8 +51,14 @@ public class UserController {
 			// user.setUserLastLoginTime(new Date());
 			// user.setUserLastLoginIp(request.getRemoteAddr());
 			// userService.updateUser(user);
+
+			// 把文章列表数据查出来,带到index页
 			List<Article> artileList = articleService.listRecentArticle(5);
 			request.setAttribute("artileList", artileList);
+
+			// 把评论列表数据查出来,带到index页
+			List<Comment> commentList = CommentService.listRecentComment(5);
+			request.setAttribute("commentList", commentList);
 			return "index"; // src/main/webapp/view/index.jsp
 		}
 	}
