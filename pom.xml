@@ -5,8 +5,8 @@
 	<groupId>com.nefu</groupId>
 	<artifactId>system</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version> 
-	
+	<version>0.0.1-SNAPSHOT</version>
+
 
 
 	<properties>
@@ -16,7 +16,7 @@
 		<!-- 声明mybatis版本 -->
 		<mybatis.version>3.4.0</mybatis.version>
 	</properties>
- 
+
 	<dependencies>
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -126,6 +126,11 @@
 			<groupId>com.googlecode.rapid-framework</groupId>
 			<artifactId>rapid-core</artifactId>
 			<version>4.0.5</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+			<version>4.2.1</version>
 		</dependency>
 	</dependencies>
 

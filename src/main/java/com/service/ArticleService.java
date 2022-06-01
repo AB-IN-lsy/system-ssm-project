@@ -3,6 +3,7 @@ package com.service;
 import java.util.List;
 
 import com.entity.Article;
+import com.github.pagehelper.PageInfo;
 
 public interface ArticleService {
 	/**
@@ -12,4 +13,6 @@ public interface ArticleService {
 	 * @return ндубап╠М
 	 */
 	List<Article> listRecentArticle(Integer n);
+
+	PageInfo<Article> getPageArticleList(Integer pageIndex, Integer pageSize);
 }

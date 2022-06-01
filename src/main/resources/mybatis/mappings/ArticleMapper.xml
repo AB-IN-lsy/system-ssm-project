@@ -4,9 +4,12 @@
 
 <mapper namespace="com.mapper.ArticleMapper">
 	<sql id="cols">
-		article_id, article_user_id, article_title, article_content,article_summary,
-		article_view_count, article_comment_count,
-		article_like_count, article_create_time,article_update_time, article_is_comment,
+		article_id, article_user_id, article_title,
+		article_content,article_summary,
+		article_view_count,
+		article_comment_count,
+		article_like_count,
+		article_create_time,article_update_time, article_is_comment,
 		article_status, article_order
 	</sql>
 
@@ -23,5 +26,18 @@
 		select
 		<include refid="cols" />
 		from article where article_id=#{id}
+	</select>
+	
+	<!-- 查询所有的文章 -->
+	<select id="findAll" resultType="Article">
+		select
+		<include refid="cols" />
+		from article order by article_order desc,article_id desc
+	</select>
+
+	<!-- 根据文章id,查询文章属于哪些分类 -->
+	<select id="listCategoryByArticleId" resultType="Category">
+		select * from category where category_id in(select category_id from
+		article_category_ref where article_id=#{articleId} )
 	</select>
 </mapper>

@@ -1,6 +1,7 @@
 package com.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class Article {
 
@@ -44,6 +45,12 @@ public class Article {
 
 	// 用户
 	private User user;
+
+	// 文章属于哪些分类, 在此项目一共有有两级分类，大分类和小分类
+	private List<Category> categoryList;
+
+	// 文章挂有哪些标签
+	// private List<Tag> tagList;
 
 	public Integer getArticleId() {
 		return articleId;
@@ -157,10 +164,12 @@ public class Article {
 		this.user = user;
 	}
 
-	// 文章挂有哪些标签
-	// private List<Tag> tagList;
+	public List<Category> getCategoryList() {
+		return categoryList;
+	}
 
-	// 文章属于哪些分类
-	// private List<Category> categoryList;
+	public void setCategoryList(List<Category> categoryList) {
+		this.categoryList = categoryList;
+	}
 
 }
