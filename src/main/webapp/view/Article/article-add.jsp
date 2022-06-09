@@ -37,7 +37,7 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">分类 <span
 				style="color: #FF5722;">*</span>
-			</label>g
+			</label>
 			<div class="layui-input-inline">
 				<select name="articleParentCategoryId" 	id="articleParentCategoryId" lay-filter="articleParentCategoryId" required>
 					<option value="" >一级分类</option>
@@ -59,7 +59,7 @@
 			<label class="layui-form-label">标签</label>
 			<div class="layui-input-block">
 				<c:forEach var="t" items="${tagList }">
-					<input type="checkbox" name="articleTagIds" lay-skin="primary" title="${t.tagName }" value="${t.tagName }"> 
+					<input type="checkbox" name="articleTagIds" lay-skin="primary" title="${t.tagName }" value="${t.tagId }"> 
 				</c:forEach>
 					
 			</div>

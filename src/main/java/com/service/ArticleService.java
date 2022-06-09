@@ -15,4 +15,6 @@ public interface ArticleService {
 	List<Article> listRecentArticle(Integer n);
 
 	PageInfo<Article> getPageArticleList(Integer pageIndex, Integer pageSize);
+
+	void add(Article article);
 }

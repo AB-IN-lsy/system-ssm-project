@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.entity.Article;
 import com.entity.Category;
+import com.entity.Tag;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mapper.ArticleMapper;
@@ -35,5 +36,22 @@ public class ArticleSericeImpl implements ArticleService {
 			a.setCategoryList(categoryList);
 		}
 		return new PageInfo<Article>(articleList);
+	}
+
+	public void add(Article article) {
+		// 往文章表中添数据
+		articleMapper.addArticle(article);
+
+		// 往文章分类对应表中添数据，（文章id, 目录id）
+		List<Category> categorylist = article.getCategoryList();
+		for (Category c : categorylist) {
+			articleMapper.addArticleCategory(article.getArticleId(), c.getCategoryId());
+		}
+
+		// 往文章标签表中添数据
+		List<Tag> tagList = article.getTagList();
+		for (Tag t : tagList) {
+			articleMapper.addArticleTag(article.getArticleId(), t.getTagId());
+		}
 	}
 }

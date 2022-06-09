@@ -4,6 +4,13 @@ import lombok.Data;
 
 @Data
 public class Category {
+	public Category() {
+	}
+
+	public Category(Integer categoryId) {
+		this.categoryId = categoryId;
+	}
+
 	// 分类的自增ID
 	private Integer categoryId;
 
