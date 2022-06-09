@@ -7,7 +7,6 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
-	<!-- 开启自动扫瞄,把组件纳入spring管理 -->
 	<context:component-scan base-package="com"  />
 	
 	<!-- 开启注解驱动 -->

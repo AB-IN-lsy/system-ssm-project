@@ -9,8 +9,7 @@
 		</span>
 	</blockquote>
 
-	<form class="layui-form" method="post" id="myForm"
-		action="/admin/article/insertSubmit">
+	<form class="layui-form" method="post" id="myForm" 	action="article/add">
 
 		<div class="layui-form-item">
 			<label class="layui-form-label">标题 <span
@@ -38,7 +37,7 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">分类 <span
 				style="color: #FF5722;">*</span>
-			</label>
+			</label>g
 			<div class="layui-input-inline">
 				<select name="articleParentCategoryId" 	id="articleParentCategoryId" lay-filter="articleParentCategoryId" required>
 					<option value="" >一级分类</option>

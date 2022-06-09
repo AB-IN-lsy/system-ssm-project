@@ -1,5 +1,8 @@
 package com.entity;
 
+import lombok.Data;
+
+@Data
 public class Category {
 	// 分类的自增ID
 	private Integer categoryId;
@@ -22,59 +25,4 @@ public class Category {
 	// 文章数量(非数据库字段)
 	private Integer articleCount;
 
-	public Integer getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(Integer categoryId) {
-		this.categoryId = categoryId;
-	}
-
-	public Integer getCategoryPid() {
-		return categoryPid;
-	}
-
-	public void setCategoryPid(Integer categoryPid) {
-		this.categoryPid = categoryPid;
-	}
-
-	public String getCategoryName() {
-		return categoryName;
-	}
-
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
-	}
-
-	public String getCategoryDescription() {
-		return categoryDescription;
-	}
-
-	public void setCategoryDescription(String categoryDescription) {
-		this.categoryDescription = categoryDescription;
-	}
-
-	public Integer getCategoryOrder() {
-		return categoryOrder;
-	}
-
-	public void setCategoryOrder(Integer categoryOrder) {
-		this.categoryOrder = categoryOrder;
-	}
-
-	public String getCategoryIcon() {
-		return categoryIcon;
-	}
-
-	public void setCategoryIcon(String categoryIcon) {
-		this.categoryIcon = categoryIcon;
-	}
-
-	public Integer getArticleCount() {
-		return articleCount;
-	}
-
-	public void setArticleCount(Integer articleCount) {
-		this.articleCount = articleCount;
-	}
 }
