@@ -82,7 +82,7 @@ public class ArticleController {
 
 		// 当前用户的id
 		User user = (User) request.getSession().getAttribute("session_user");
-		if (user != null)
+		if(user != null)
 			article.setArticleUserId(user.getUserId());
 
 		// 文章标题 服务端永远取的都是name
