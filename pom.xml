@@ -24,7 +24,7 @@
 			<artifactId>lombok</artifactId>
 			<version>1.18.24</version>
 		</dependency>
-		
+
 		<!-- 添加logback日志 -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
@@ -222,6 +222,17 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
 			<version>${jackson-databind-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.11.0</version>
 		</dependency>
 
 	</dependencies>

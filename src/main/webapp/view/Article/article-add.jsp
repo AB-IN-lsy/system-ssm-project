@@ -239,7 +239,8 @@
 				themeType : 'simple',
 				allowFileManager : true,
 				width : "1100px",
-				height : "420px"
+				height : "420px",
+				uploadJson : "article/uploadImg",   //指向的是一个服务端地址,用于图片上传
 			});
 			prettyPrint();
 		});

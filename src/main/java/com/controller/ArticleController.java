@@ -1,5 +1,7 @@
 package com.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,6 +14,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.entity.Article;
 import com.entity.Category;
@@ -22,7 +27,10 @@ import com.service.ArticleService;
 import com.service.CategoryService;
 import com.service.TagService;
 
+import cn.hutool.core.lang.UUID;
 import cn.hutool.http.HtmlUtil;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 
 /**
  * 文章信息,控制层
@@ -82,7 +90,7 @@ public class ArticleController {
 
 		// 当前用户的id
 		User user = (User) request.getSession().getAttribute("session_user");
-		if(user != null)
+		if (user != null)
 			article.setArticleUserId(user.getUserId());
 
 		// 文章标题 服务端永远取的都是name
@@ -135,4 +143,29 @@ public class ArticleController {
 		return "forward:/article";
 
 	}
+
+	@ResponseBody
+	@RequestMapping("/uploadImg")
+	public String uploadArticleImg(MultipartHttpServletRequest request) throws IllegalStateException, IOException {
+		// 得到客户端传过来的图片 , imgFile 是一个固定名称
+		MultipartFile file = request.getFile("imgFile");
+
+		// 随机生成一个文件名
+		String fileName = UUID.randomUUID().toString() + ".jpg";
+
+		// 定义一个存放文件的目标
+		File destFile = new File("C:/Users/liusy/Pictures/uploadImg/" + fileName);
+
+		// 把文件存到某个目录下
+		file.transferTo(destFile);
+
+		String path = "http://localhost:8080/upload/" + fileName;
+
+		// 注意,这个 JSONObject 是来源于 hutool 工具包
+		@SuppressWarnings("deprecation")
+		JSONObject obj = JSONUtil.createObj().put("error", 0).put("url", path);
+
+		return obj.toString();
+	}
+
 }
