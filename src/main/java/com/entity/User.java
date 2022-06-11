@@ -18,4 +18,6 @@ public class User {
 	private Date userLastLoginTime; // 最后登录的时间
 	private Integer userStatus; // 用户的状态
 	private byte[] userPhoto; // 用户照片,存的是具体的照片数据
+
+	private Integer articleCount; // 用户发布的文章数量
 }

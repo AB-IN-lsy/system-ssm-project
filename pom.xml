@@ -18,7 +18,7 @@
 
 
 	<dependencies>
-
+		<!-- lombok -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -160,24 +160,7 @@
 			<version>4.13.2</version>
 			<scope>test</scope>
 		</dependency>
-
-
-		<dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
-			<version>1.4</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.11.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.json</groupId>
-			<artifactId>json</artifactId>
-			<version>20220320</version>
-		</dependency>
+		<!-- rapid 模板页 -->
 		<dependency>
 			<groupId>com.googlecode.rapid-framework</groupId>
 			<artifactId>rapid-core</artifactId>
@@ -189,16 +172,11 @@
 			<artifactId>guava</artifactId>
 			<version>31.1-jre</version>
 		</dependency>
-
+		<!-- 分页支持 -->
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
 			<artifactId>pagehelper</artifactId>
 			<version>5.3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>fastjson</artifactId>
-			<version>2.0.3</version>
 		</dependency>
 
 		<!-- hutool工具包 -->
@@ -207,7 +185,8 @@
 			<artifactId>hutool-all</artifactId>
 			<version>5.8.0</version>
 		</dependency>
-
+		
+		<!-- 引入json相关的依赖 -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
@@ -223,7 +202,18 @@
 			<artifactId>jackson-annotations</artifactId>
 			<version>${jackson-databind-version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20220320</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>2.0.3</version>
+		</dependency>
+		
+		<!-- 文件上传 -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>

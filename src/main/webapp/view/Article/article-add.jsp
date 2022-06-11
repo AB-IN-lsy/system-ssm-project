@@ -42,7 +42,7 @@
 			<label class="layui-form-label">内容 <span
 				style="color: #FF5722;">*</span></label>
 			<div class="layui-input-block">
-				<textarea  name="articleContent" lay-verify="content" id="content"></textarea>
+				<textarea name="articleContent" lay-verify="content" id="content"></textarea>
 			</div>
 		</div>
 
@@ -126,111 +126,33 @@
 							});
 
 							//二级联动
-							form
-									.on(
-											"select(articleParentCategoryId)",
-											function() {
-												var optionstring = "";
-												var articleParentCategoryId = $(
-														"#articleParentCategoryId")
-														.val();
-
-												if (articleParentCategoryId == 0) {
-													optionstring += "<option name='childCategory' value='1'>Java</option>";
-												}
-
-												if (articleParentCategoryId == 1) {
-													optionstring += "<option name='childCategory' value='2'>Java基础</option>";
-												}
-
-												if (articleParentCategoryId == 1) {
-													optionstring += "<option name='childCategory' value='3'>Core Java</option>";
-												}
-
-												if (articleParentCategoryId == 1) {
-													optionstring += "<option name='childCategory' value='4'>多线程并发编程</option>";
-												}
-
-												if (articleParentCategoryId == 1) {
-													optionstring += "<option name='childCategory' value='5'>Sockets和IO</option>";
-												}
-
-												if (articleParentCategoryId == 1) {
-													optionstring += "<option name='childCategory' value='6'>设计模式和反射</option>";
-												}
-
-												if (articleParentCategoryId == 1) {
-													optionstring += "<option name='childCategory' value='7'>JVM</option>";
-												}
-
-												if (articleParentCategoryId == 1) {
-													optionstring += "<option name='childCategory' value='8'>JavaWeb</option>";
-												}
-
-												if (articleParentCategoryId == 1) {
-													optionstring += "<option name='childCategory' value='9'>Java框架</option>";
-												}
-
-												if (articleParentCategoryId == 0) {
-													optionstring += "<option name='childCategory' value='10'>计算机科学</option>";
-												}
-
-												if (articleParentCategoryId == 10) {
-													optionstring += "<option name='childCategory' value='11'>数据结构和算法</option>";
-												}
-
-												if (articleParentCategoryId == 10) {
-													optionstring += "<option name='childCategory' value='12'>操作系统</option>";
-												}
-
-												if (articleParentCategoryId == 10) {
-													optionstring += "<option name='childCategory' value='13'>数据库</option>";
-												}
-
-												if (articleParentCategoryId == 10) {
-													optionstring += "<option name='childCategory' value='14'>计算机网络</option>";
-												}
-
-												if (articleParentCategoryId == 0) {
-													optionstring += "<option name='childCategory' value='15'>其他技术</option>";
-												}
-
-												if (articleParentCategoryId == 15) {
-													optionstring += "<option name='childCategory' value='16'>消息服务</option>";
-												}
-
-												if (articleParentCategoryId == 15) {
-													optionstring += "<option name='childCategory' value='17'>缓存服务</option>";
-												}
-
-												if (articleParentCategoryId == 100000000) {
-													optionstring += "<option name='childCategory' value='19'>Hello</option>";
-												}
-
-												if (articleParentCategoryId == 15) {
-													optionstring += "<option name='childCategory' value='100000003'>微服务</option>";
-												}
-
-												if (articleParentCategoryId == 15) {
-													optionstring += "<option name='childCategory' value='100000004'>搜索引擎</option>";
-												}
-
-												if (articleParentCategoryId == 15) {
-													optionstring += "<option name='childCategory' value='100000005'>权限框架</option>";
-												}
-
-												if (articleParentCategoryId == 15) {
-													optionstring += "<option name='childCategory' value='100000006'>开发利器</option>";
-												}
-
-												$("#articleChildCategoryId")
-														.html(
-																"<option value=''selected>二级分类</option>"
-																		+ optionstring);
-												form.render('select'); //这个很重要
-											})
-
-						});
+							form.on(
+									"select(articleParentCategoryId)",
+									function() {
+										    var pid= $("#articleParentCategoryId").val();
+										    // ajax 优点：不用刷新、传速快
+											$.ajax({
+											url:"category/listSub",
+											type:"post",
+											data:{parentId:pid},
+											dataType:"json",
+											
+											success:function(cateList){
+												$("#articleChildCategoryId").empty(); // 拼之前把旧的移除掉
+												$("#articleChildCategoryId").append("<option value=''>二级分类</option>");
+												for(var i=0;i<cateList.length;i++){
+													var cate=cateList[i];
+													
+													var str="<option value='"+cate.categoryId+"'> "+cate.categoryName+"</option>";
+													//var str=`<option value='${cate.categoryId}'> ${cate.categoryName}</option>`;
+													$("#articleChildCategoryId").append(str);
+												}	
+												
+												form.render('select'); //这个很重要，最后渲染上
+											}
+										});
+									})
+								});
 	</script>
 
 	<script>
