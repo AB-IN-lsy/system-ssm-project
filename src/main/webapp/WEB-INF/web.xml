@@ -49,4 +49,10 @@
 		<servlet-name>springmvc</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+	<!-- 404 page -->
+	<error-page>
+    	<error-code>404</error-code>
+    	<location>/resources/page/404/index.jsp</location>
+  	</error-page>
 </web-app>

@@ -3,18 +3,23 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
 
 	<context:component-scan base-package="com"  />
 	
 	<!-- 开启注解驱动 -->
 	<mvc:annotation-driven />
 	
+	<!-- 开启aop -->
+	<aop:aspectj-autoproxy />
+	
 	<!-- 配置视图解析器 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/view/" />
+		<property name="prefix" value="/WEB-INF/view/" />
 		<property name="suffix" value=".jsp"  />
 	</bean>
 	
@@ -23,8 +28,19 @@
 	
 	<!-- 配置图片上传 -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	
 	<!--最大尺寸为50MB-->
 	    <property name="maxUploadSize" value="52428800" />
 	    <property name="defaultEncoding" value="UTF-8" />
 	</bean>
+	
+	<!-- 在配置文件中配置拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>   <!-- 拦截所有 -->
+			<mvc:exclude-mapping path="/user/login" />   <!-- 登录的功能不能拦 -->
+			<mvc:exclude-mapping path="/resources/**" />   <!-- 所有的静态资源可以不拦 -->
+			<bean class="com.aop.SessionInterceptor"  />   <!-- 指明拦截器是哪个类 -->
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>

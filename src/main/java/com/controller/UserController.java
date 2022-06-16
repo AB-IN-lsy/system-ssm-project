@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -57,7 +58,36 @@ public class UserController {
 		return "/User/user-list";
 	}
 
-	@RequestMapping("/login")
+	/**
+	 * 退出登录
+	 * 
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		// 一定要清除用户的session
+		session.invalidate();
+		return "login";
+	}
+
+	/**
+	 * 绕行访问服务端，转到登陆页面
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String goToLogin() {
+		return "login";
+	}
+
+	/**
+	 * 访问后台主页
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(HttpServletRequest request) {
 		String userNameOrEmail = request.getParameter("userName");
 		String userPass = request.getParameter("userPass");
@@ -78,8 +108,8 @@ public class UserController {
 			// 如果用户勾选了rememberMe , 添加cookie相关的信息
 			// 更新用户的最后登录时间
 			// 更新用户的最后登录ip
-			// user.setUserLastLoginTime(new Date());
-			// user.setUserLastLoginIp(request.getRemoteAddr());
+			user.setUserLastLoginTime(new Date());
+			user.setUserLastLoginIp(request.getRemoteAddr());
 			// userService.updateUser(user);
 
 			// 把文章列表数据查出来,带到index页
@@ -95,6 +125,8 @@ public class UserController {
 
 	/**
 	 * 从导航上转到用户添加页面
+	 * 
+	 * @return
 	 */
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String goToAdd() {

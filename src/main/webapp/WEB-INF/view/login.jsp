@@ -21,6 +21,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    
     <meta name='robots' content='noindex,follow' />
     <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
 </head>
 
 <body class="login login-action-login wp-core-ui  locale-zh-cn">

@@ -62,7 +62,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							<a href="/admin/user/profile">基本资料</a>
 						</dd>
 					</dl></li>
-				<li class="layui-nav-item"><a href="/admin/logout">退出</a></li>
+				<li class="layui-nav-item"><a href="user/logout" onclick="return confrim('确定要退出吗?')">退出</a></li>
 			</ul>
 		</div>
 
