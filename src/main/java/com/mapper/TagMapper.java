@@ -8,4 +8,10 @@ public interface TagMapper {
 
 	List<Tag> listTag();
 
+	void addTag(Tag tag);
+
+	Tag getTagById(Integer tagId);
+
+	void updateTag(Tag tag);
+
 }

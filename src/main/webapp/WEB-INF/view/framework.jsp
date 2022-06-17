@@ -28,7 +28,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 	<div class="layui-layout layui-layout-admin">
 		<div class="layui-header">
 			<div class="layui-logo">
-				<a href="/admin" style="color: #009688;"> 博客后台 </a>
+				<a href="user/index" style="color: #009688;"> 博客后台 </a>
 			</div>
 			<!-- 头部区域（可配合layui已有的水平导航） -->
 			<ul class="layui-nav layui-layout-left">
@@ -36,19 +36,19 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				<li class="layui-nav-item"><a href="javascript:;">新建</a>
 					<dl class="layui-nav-child">
 						<dd>
-							<a href="/admin/article/insert">文章</a>
+							<a href="article/insert">文章</a>
 						</dd>
 						<dd>
-							<a href="/admin/page/insert">页面</a>
+							<a href="page/insert">页面</a>
 						</dd>
 						<dd>
-							<a href="/admin/category/insert">分类</a>
+							<a href="category/insert">分类</a>
 						</dd>
 						<dd>
-							<a href="/admin/notice/insert">公告</a>
+							<a href="notice/insert">公告</a>
 						</dd>
 						<dd>
-							<a href="/admin/link/insert">链接</a>
+							<a href="link/insert">链接</a>
 						</dd>
 					</dl></li>
 			</ul>
@@ -59,7 +59,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				</a>
 					<dl class="layui-nav-child">
 						<dd>
-							<a href="/admin/user/profile">基本资料</a>
+							<a href="user/profile">基本资料</a>
 						</dd>
 					</dl></li>
 				<li class="layui-nav-item"><a href="user/logout" onclick="return confrim('确定要退出吗?')">退出</a></li>
@@ -80,38 +80,38 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 								<a href="article/add">写文章</a>
 							</dd>
 							<dd>
-								<a href="/admin/category">全部分类</a>
+								<a href="category">全部分类</a>
 							</dd>
 							<dd>
-								<a href="/admin/tag">全部标签</a>
+								<a href="tag">全部标签</a>
 							</dd>
 						</dl></li>
 					<li class="layui-nav-item"><a href="javascript:;">页面</a>
 						<dl class="layui-nav-child">
 							<dd>
-								<a href="/admin/page">全部页面</a>
+								<a href="page">全部页面</a>
 							</dd>
 							<dd>
-								<a href="/admin/page/insert">添加页面</a>
+								<a href="page/insert">添加页面</a>
 							</dd>
 						</dl></li>
 					<li class="layui-nav-item"><a class="" href="javascript:;">
 							链接 </a>
 						<dl class="layui-nav-child">
 							<dd>
-								<a href="/admin/link">全部链接</a>
+								<a href="link">全部链接</a>
 							</dd>
 							<dd>
-								<a href="/admin/link/insert">添加链接</a>
+								<a href="link/insert">添加链接</a>
 							</dd>
 						</dl></li>
 					<li class="layui-nav-item"><a href="javascript:;">公告</a>
 						<dl class="layui-nav-child">
 							<dd>
-								<a href="/admin/notice">全部公告</a>
+								<a href="notice">全部公告</a>
 							</dd>
 							<dd>
-								<a href="/admin/notice/insert">添加公告</a>
+								<a href="notice/insert">添加公告</a>
 							</dd>
 						</dl></li>
 					<li class="layui-nav-item"><a href="/admin/comment"> 评论 </a></li>
@@ -128,10 +128,10 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 					<li class="layui-nav-item"><a href="javascript:;">设置</a>
 						<dl class="layui-nav-child">
 							<dd>
-								<a href="/admin/menu">菜单</a>
+								<a href="menu">菜单</a>
 							</dd>
 							<dd>
-								<a href="/admin/options">主要选项</a>
+								<a href="options">主要选项</a>
 							</dd>
 						</dl></li>
 				</ul>

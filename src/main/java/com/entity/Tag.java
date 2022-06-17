@@ -14,5 +14,5 @@ public class Tag {
 	private Integer tagId;
 	private String tagName;
 	private String tagDescription;
-
+	private Integer articleCount; // ·ÇÊý¾Ý¿â×Ö¶Î
 }

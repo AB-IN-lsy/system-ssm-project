@@ -21,7 +21,7 @@
 								<h3>最近发布</h3>
 								<br>
 								<ul>
-									<c:forEach var="a" items="${artileList}">
+									<c:forEach var="a" items="${articleList}">
 										<li><span> <fmt:formatDate
 													value="${a.articleCreateTime }" pattern="yyyy/MM/dd HH:mm" />
 										</span> <a href="/article/${a.articleId }" target="_blank">${a.articleTitle }</a>

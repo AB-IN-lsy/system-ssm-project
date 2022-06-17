@@ -36,7 +36,7 @@ public class UserController {
 	private ArticleService articleService;
 
 	@Autowired
-	private CommentService CommentService;
+	private CommentService commentService;
 
 	/**
 	 * 分页查询用户信息
@@ -56,6 +56,27 @@ public class UserController {
 		m.put("pageUrlPrefix", "user?pageIndex"); // 把前缀传给分页的页面
 		m.put("pageInfo", pageInfo);
 		return "/User/user-list";
+	}
+
+	/**
+	 * 后台首页
+	 *
+	 * @return
+	 */
+	@RequestMapping("/index")
+	public String index(HttpSession session, ModelMap m) {
+		User user = (User) session.getAttribute("session_user");
+		// 文章列表
+		List<Article> articleList = articleService.listRecentArticle(5);
+		m.put("articleList", articleList);
+
+		// 评论列表
+		List<Comment> commentList = commentService.listRecentComment(5);
+		m.put("commentList", commentList);
+
+		// 用户
+		m.put("userId", user.getUserId());
+		return "index";
 	}
 
 	/**
@@ -101,6 +122,9 @@ public class UserController {
 		} else if (!user.getUserPass().equals(userPass)) {
 			request.setAttribute("msg", "密码错误");
 			return "login";
+		} else if (user.getUserStatus() == 0) {
+			request.setAttribute("msg", "账号已禁用！");
+			return "login";
 		} else {
 			// 用户登录成功能后,把用户相关的信息放到 session中,方便以后使用
 			request.getSession().setAttribute("session_user", user);
@@ -113,11 +137,11 @@ public class UserController {
 			// userService.updateUser(user);
 
 			// 把文章列表数据查出来,带到index页
-			List<Article> artileList = articleService.listRecentArticle(5);
-			request.setAttribute("artileList", artileList);
+			List<Article> articleList = articleService.listRecentArticle(5);
+			request.setAttribute("articleList", articleList);
 
 			// 把评论列表数据查出来,带到index页
-			List<Comment> commentList = CommentService.listRecentComment(5);
+			List<Comment> commentList = commentService.listRecentComment(5);
 			request.setAttribute("commentList", commentList);
 			return "index"; // src/main/webapp/view/index.jsp
 		}
