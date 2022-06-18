@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.entity.Tag;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.mapper.ArticleMapper;
 import com.mapper.TagMapper;
 import com.service.TagService;
 
@@ -17,6 +18,9 @@ public class TagServiceImpl implements TagService {
 	@Autowired
 	private TagMapper tagMapper;
 
+	@Autowired
+	private ArticleMapper articleMapper;
+
 	public List<Tag> listTag() {
 		return tagMapper.listTag();
 	}
@@ -25,6 +29,9 @@ public class TagServiceImpl implements TagService {
 		PageHelper.startPage(pageIndex, pageSize);
 
 		List<Tag> tagList = tagMapper.listTag();
+		for (Tag t : tagList) {
+			t.setArticleCount(articleMapper.countArticleBytagId(t.getTagId()));
+		}
 
 		return new PageInfo<Tag>(tagList);
 	}
@@ -47,6 +54,12 @@ public class TagServiceImpl implements TagService {
 		// TODO Auto-generated method stub
 		tagMapper.updateTag(tag);
 
+	}
+
+	@Override
+	public void deleteTag(Integer tagId) {
+		// TODO Auto-generated method stub
+		tagMapper.deleteTag(tagId);
 	}
 
 }

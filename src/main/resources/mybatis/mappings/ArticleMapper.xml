@@ -72,4 +72,9 @@
 	<insert id="addArticleTag">
 		insert into article_tag_ref (article_id,tag_id)  values (#{articleId}, #{tagId}) 
 	</insert>
+	
+	<!-- 根据标签ID查询文章数目 -->
+	<select id="countArticleBytagId" resultType="Integer">
+		select count(*) from article_tag_ref where tag_id=#{tagId} 
+	</select>
 </mapper>

@@ -15,4 +15,6 @@ public interface TagService {
 	Tag getTagById(Integer tagId);
 
 	void updateTag(Tag tag);
+
+	void deleteTag(Integer tagId);
 }

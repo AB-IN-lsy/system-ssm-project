@@ -64,4 +64,13 @@ public interface ArticleMapper {
 	 */
 	void addArticleTag(@Param("articleId") Integer articleId, @Param("tagId") Integer tagId);
 
+	/**
+	 * 根据标签ID查询文章数目
+	 * 
+	 * @param tagId
+	 * @return
+	 */
+
+	Integer countArticleBytagId(Integer tagId);
+
 }

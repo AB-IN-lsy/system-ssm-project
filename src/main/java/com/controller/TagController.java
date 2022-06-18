@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.entity.Tag;
 import com.github.pagehelper.PageInfo;
+import com.service.ArticleService;
 import com.service.TagService;
 
 @Controller
@@ -16,6 +17,9 @@ import com.service.TagService;
 public class TagController {
 	@Autowired
 	TagService tagService;
+
+	@Autowired
+	ArticleService articleService;
 
 	/**
 	 * 分页查询标签信息
@@ -67,6 +71,22 @@ public class TagController {
 	public String editTag(@PathVariable("tagId") Integer tagId, ModelMap m) {
 		Tag tag = tagService.getTagById(tagId);
 		m.put("tag", tag);
+
+		return "forward:/tag";
+	}
+
+	/**
+	 * 根据id,删除tag
+	 * 
+	 * @param tagId
+	 * @return
+	 */
+	@RequestMapping("/delete/{tagId}")
+	public String deleteTag(@PathVariable("tagId") Integer tagId) {
+		Integer count = articleService.countArticleByTagId(tagId);
+		if (count == 0) {
+			tagService.deleteTag(tagId);
+		}
 
 		return "forward:/tag";
 	}

@@ -89,7 +89,10 @@
 	                        </td>
 	                        <td>
 	                            <a href="tag/edit/${t.tagId }" class="layui-btn layui-btn-mini">编辑</a>
-	                            </td>
+	                            <c:if test="${t.articleCount==0}">
+                                	<a href="tag/delete/${t.tagId }" class="layui-btn layui-btn-danger layui-btn-mini" onclick="return confirmDelete()">删除</a>
+                            	</c:if>
+	                        </td>
 	                        <td >${t.tagId }</td>
 	                 </tr>  
                  </c:forEach>

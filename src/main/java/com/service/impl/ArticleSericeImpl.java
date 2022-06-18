@@ -54,4 +54,10 @@ public class ArticleSericeImpl implements ArticleService {
 			articleMapper.addArticleTag(article.getArticleId(), t.getTagId());
 		}
 	}
+
+	@Override
+	public Integer countArticleByTagId(Integer tagId) {
+		// TODO Auto-generated method stub
+		return articleMapper.countArticleBytagId(tagId);
+	}
 }

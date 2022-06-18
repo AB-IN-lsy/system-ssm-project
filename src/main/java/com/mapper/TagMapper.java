@@ -14,4 +14,6 @@ public interface TagMapper {
 
 	void updateTag(Tag tag);
 
+	void deleteTag(Integer tagId);
+
 }

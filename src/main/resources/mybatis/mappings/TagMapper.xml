@@ -7,7 +7,7 @@
 		select * from tag order by tag_id desc
 	</select>
 	
-	<insert id="addTag">
+	<insert id="addTag" parameterType="Tag" useGeneratedKeys="true" keyProperty="tagId">
 		insert into tag (tag_name, tag_description) values (#{tagName}, #{tagDescription})
 	</insert>
 	
@@ -18,4 +18,10 @@
 	<update id="updateTag">
 		update tag set tag_name=#{tagName}, tag_description=#{tagDescription} where tag_id=#{tagId};
 	</update>
+	
+  	<delete id="deleteTag" parameterType="Integer" >
+	    delete from tag
+	    where tag_id = #{tagId}
+  	</delete>
+	
 </mapper>
