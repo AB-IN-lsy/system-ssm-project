@@ -74,7 +74,12 @@
 	</insert>
 	
 	<!-- 根据标签ID查询文章数目 -->
-	<select id="countArticleBytagId" resultType="Integer">
+	<select id="countArticleByTagId" resultType="Integer">
 		select count(*) from article_tag_ref where tag_id=#{tagId} 
+	</select>
+	
+	<!-- 根据分类ID查询文章数目 -->
+	<select id="countArticleByCategoryId" resultType="Integer">
+		select count(*) from article_category_ref where category_id=#{categoryId} 
 	</select>
 </mapper>

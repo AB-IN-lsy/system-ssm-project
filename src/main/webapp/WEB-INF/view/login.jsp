@@ -21,18 +21,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    
     <meta name='robots' content='noindex,follow' />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
+
 </head>
 
 <body class="login login-action-login wp-core-ui  locale-zh-cn">
 	<div id="login">
 	    <br /> <br /> 
+	    <%
+	         String username = "";
+	         String password = "";
+	         //获取当前站点的所有Cookie
+	         Cookie[] cookies = request.getCookies();
+	         for (int i = 0; i < cookies.length; i++) {//对cookies中的数据进行遍历，找到用户名、密码的数据
+	             if ("username".equals(cookies[i].getName())) {
+	                    username = cookies[i].getValue();
+	             } else if ("password".equals(cookies[i].getName())) {
+	                 password = cookies[i].getValue();
+	             }
+	         }
+     	%>
 	    <form action="user/login"  method="post">
 	        <p>
 	            <label for="user_login">用户名或电子邮件地址<br />
-	             <input type="text" name="userName" id="user_login" class="input" value="admin" size="20" required/></label>
+	             <input type="text" name="userName" id="user_login" class="input" size="20" required/></label>
 	        </p>
 	        <p>
 	            <label for="user_pass">密码<br />

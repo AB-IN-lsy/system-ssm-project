@@ -67,6 +67,12 @@ public class ArticleController {
 		return "/Article/article-list";
 	}
 
+	/**
+	 * 去往文章发布页
+	 * 
+	 * @param m
+	 * @return
+	 */
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String goToAdd(ModelMap m) {
 		// 分类信息
@@ -83,9 +89,15 @@ public class ArticleController {
 		return "/Article/article-add";
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String add(HttpServletRequest request) {
+	/**
+	 * 添加文章
+	 * 
+	 * @param request
+	 * @return
+	 */
 
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public String addArticle(HttpServletRequest request) {
 		Article article = new Article();
 
 		// 当前用户的id
@@ -117,33 +129,119 @@ public class ArticleController {
 		// 文章的状态
 		article.setArticleStatus(Integer.parseInt(request.getParameter("articleStatus")));
 
-		// 一级分类
-		int articleParentCategoryId = Integer.parseInt(request.getParameter("articleParentCategoryId"));
-
-		// 二级分类
-		int articleChildCategoryId = Integer.parseInt(request.getParameter("articleChildCategoryId"));
-
+		// 填充分类
 		List<Category> categoryList = new ArrayList<Category>(2);
-		categoryList.add(new Category(articleParentCategoryId));
-		categoryList.add(new Category(articleChildCategoryId));
+
+		// 一级分类 添加了判断是否非空
+		if (request.getParameter("articleParentCategoryId") != null) {
+			int articleParentCategoryId = Integer.parseInt(request.getParameter("articleParentCategoryId"));
+			categoryList.add(new Category(articleParentCategoryId));
+		}
+		// 二级分类
+		if (request.getParameter("articleChildCategoryId") != null) {
+			int articleChildCategoryId = Integer.parseInt(request.getParameter("articleChildCategoryId"));
+			categoryList.add(new Category(articleChildCategoryId));
+		}
 		article.setCategoryList(categoryList);
 
-		// 标签
-		String[] tagIds = request.getParameterValues("articleTagIds"); // 复选框都是同名，故用字符数组接取
+		// 填充标签 添加了判断是否非空
 		List<Tag> tagList = new ArrayList<>();
-		for (String tagId : tagIds) {
-			tagList.add(new Tag(Integer.parseInt(tagId)));
+		if (request.getParameter("articleTagIds") != null) {
+			String[] tagIds = request.getParameterValues("articleTagIds"); // 复选框都是同名，故用字符数组接取
+			for (String tagId : tagIds) {
+				tagList.add(new Tag(Integer.parseInt(tagId)));
+			}
 		}
+
 		article.setTagList(tagList);
 
 		// 数据准备好以后,调用业务层
-		articleService.add(article);
+		articleService.addArticle(article);
 
 		// 转到文章列表页，相当于刷新一下
 		return "forward:/article";
-
 	}
 
+	/**
+	 * 添加草稿
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/addDraft", method = RequestMethod.POST)
+	public String addDraft(HttpServletRequest request) {
+		Article article = new Article();
+
+		// 当前用户的id
+		User user = (User) request.getSession().getAttribute("session_user");
+		if (user != null)
+			article.setArticleUserId(user.getUserId());
+
+		// 文章标题 服务端永远取的都是name
+		article.setArticleTitle(request.getParameter("articleTitle"));
+
+		// 文章内容
+		article.setArticleContent(request.getParameter("articleContent"));
+
+		// 文章摘要
+		String s = HtmlUtil.cleanHtmlTag(article.getArticleContent()); // hutool数据包，去除html标签
+		article.setArticleSummary(s.length() > 150 ? s.substring(0, 150) : s);
+
+		// 文章的发布时间,修改时间
+		article.setArticleCreateTime(new Date());
+		article.setArticleUpdateTime(new Date());
+
+		article.setArticleCommentCount(0);
+		article.setArticleLikeCount(0);
+		article.setArticleViewCount(0);
+
+		// 默认的排序
+		article.setArticleOrder(1);
+
+		// 文章的状态
+		article.setArticleStatus(Integer.parseInt(request.getParameter("articleStatus")));
+
+		// 填充分类
+		List<Category> categoryList = new ArrayList<Category>(2);
+
+		// 一级分类 添加了判断是否非空
+		if (request.getParameter("articleParentCategoryId") != null) {
+			int articleParentCategoryId = Integer.parseInt(request.getParameter("articleParentCategoryId"));
+			categoryList.add(new Category(articleParentCategoryId));
+		}
+		// 二级分类
+		if (request.getParameter("articleChildCategoryId") != null) {
+			int articleChildCategoryId = Integer.parseInt(request.getParameter("articleChildCategoryId"));
+			categoryList.add(new Category(articleChildCategoryId));
+		}
+		article.setCategoryList(categoryList);
+
+		// 填充标签 添加了判断是否非空
+		List<Tag> tagList = new ArrayList<>();
+		if (request.getParameter("articleTagIds") != null) {
+			String[] tagIds = request.getParameterValues("articleTagIds"); // 复选框都是同名，故用字符数组接取
+			for (String tagId : tagIds) {
+				tagList.add(new Tag(Integer.parseInt(tagId)));
+			}
+		}
+
+		article.setTagList(tagList);
+
+		// 数据准备好以后,调用业务层
+		articleService.addArticle(article);
+
+		// 转到主页
+		return "forward:/user/index";
+	}
+
+	/**
+	 * 上传图片
+	 * 
+	 * @param request
+	 * @return
+	 * @throws IllegalStateException
+	 * @throws IOException
+	 */
 	@ResponseBody
 	@RequestMapping("/uploadImg")
 	public String uploadArticleImg(MultipartHttpServletRequest request) throws IllegalStateException, IOException {

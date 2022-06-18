@@ -26,26 +26,27 @@
 <rapid:override name="frame-content">
 	<blockquote class="layui-elem-quote">
         <span class="layui-breadcrumb" lay-separator="/">
-              <a href="/admin">首页</a>
+              <a href="/user/index">首页</a>
+         
               <a><cite>标签列表</cite></a>
         </span>
     </blockquote>
     <div class="layui-row">
         <div class="layui-col-md4">
-  			<form class="layui-form"  method="post" id="myForm" action="tag/addOrUpdate">
-          	  <input type="hidden" name="tagId"  value="${tag.tagId }" >
+  			<form class="layui-form"  method="post" id="myForm" action="tag/add">
+          	  <input type="hidden" name="tagId">
               <div class="layui-form-item">
                   <div class="layui-input-block">
                       <strong>添加标签</strong>
                   </div>
                   <div class="layui-input-block">
                       名称 <span style="color: #FF5722; ">*</span>
-                      <input type="text" name="tagName" value="${tag.tagName }" placeholder="请输入标签名称" autocomplete="off" class="layui-input" required>
+                      <input type="text" name="tagName"  placeholder="请输入标签名称" autocomplete="off" class="layui-input" required>
                   </div>
                   <br>
                   <div class="layui-input-block">
                       标签描述
-                      <input type="text" name="tagDescription" value="${tag.tagDescription }" placeholder="请输入标签描述" autocomplete="off" class="layui-input" >
+                      <input type="text" name="tagDescription" placeholder="请输入标签描述" autocomplete="off" class="layui-input" >
                   </div>
                   <br>
                   <div class="layui-input-block">
@@ -79,7 +80,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                  <c:forEach var="t" items="${pageInfo.list}">
+                  <c:forEach var="t" items="${tagList}">
 	                  <tr>
 	                        <td>
 	                            <a href="tag/${t.tagId }" target="_blank">${t.tagName }</a>
@@ -99,7 +100,6 @@
 
                 </tbody>
             </table>
-            <%@ include file="../page.jsp" %>
             <blockquote class="layui-elem-quote layui-quote-nm">
                 温馨提示：
                 <ul>

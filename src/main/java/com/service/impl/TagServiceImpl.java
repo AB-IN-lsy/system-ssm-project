@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.entity.Tag;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.mapper.ArticleMapper;
 import com.mapper.TagMapper;
 import com.service.TagService;
@@ -22,18 +20,12 @@ public class TagServiceImpl implements TagService {
 	private ArticleMapper articleMapper;
 
 	public List<Tag> listTag() {
-		return tagMapper.listTag();
-	}
-
-	public PageInfo<Tag> getPageTagList(Integer pageIndex, Integer pageSize) {
-		PageHelper.startPage(pageIndex, pageSize);
 
 		List<Tag> tagList = tagMapper.listTag();
 		for (Tag t : tagList) {
-			t.setArticleCount(articleMapper.countArticleBytagId(t.getTagId()));
+			t.setArticleCount(articleMapper.countArticleByTagId(t.getTagId()));
 		}
-
-		return new PageInfo<Tag>(tagList);
+		return tagList;
 	}
 
 	@Override
@@ -50,9 +42,9 @@ public class TagServiceImpl implements TagService {
 	}
 
 	@Override
-	public void updateTag(Tag tag) {
+	public void editTag(Tag tag) {
 		// TODO Auto-generated method stub
-		tagMapper.updateTag(tag);
+		tagMapper.editTag(tag);
 
 	}
 

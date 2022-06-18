@@ -38,7 +38,7 @@ public class ArticleSericeImpl implements ArticleService {
 		return new PageInfo<Article>(articleList);
 	}
 
-	public void add(Article article) {
+	public void addArticle(Article article) {
 		// 往文章表中添数据
 		articleMapper.addArticle(article);
 
@@ -58,6 +58,12 @@ public class ArticleSericeImpl implements ArticleService {
 	@Override
 	public Integer countArticleByTagId(Integer tagId) {
 		// TODO Auto-generated method stub
-		return articleMapper.countArticleBytagId(tagId);
+		return articleMapper.countArticleByTagId(tagId);
+	}
+
+	@Override
+	public Integer countArticleByCategoryId(Integer categoryId) {
+		// TODO Auto-generated method stub
+		return articleMapper.countArticleByCategoryId(categoryId);
 	}
 }

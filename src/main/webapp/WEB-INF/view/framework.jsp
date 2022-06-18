@@ -36,26 +36,27 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				<li class="layui-nav-item"><a href="javascript:;">新建</a>
 					<dl class="layui-nav-child">
 						<dd>
-							<a href="article/insert">文章</a>
+							<a href="article/add">文章</a>
 						</dd>
 						<dd>
-							<a href="page/insert">页面</a>
+							<a href="page/add">页面</a>
 						</dd>
 						<dd>
-							<a href="category/insert">分类</a>
+							<a href="category/add">分类</a>
 						</dd>
 						<dd>
-							<a href="notice/insert">公告</a>
+							<a href="notice/add">公告</a>
 						</dd>
 						<dd>
-							<a href="link/insert">链接</a>
+							<a href="link/add">链接</a>
 						</dd>
 					</dl></li>
 			</ul>
 			<ul class="layui-nav layui-layout-right">
-				<li class="layui-nav-item"><a href="javascript:;"> <img
-						src="resources/uploads/2017/10/20171006225356181.jpg"
-						class="layui-nav-img"> admin
+				<li class="layui-nav-item">
+				<a href="javascript:;"> 
+					<img class="layui-nav-img" src="<%=basePath%>user/photo/${session_user.userId}">
+					${session_user.userName} 
 				</a>
 					<dl class="layui-nav-child">
 						<dd>
@@ -92,7 +93,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 								<a href="page">全部页面</a>
 							</dd>
 							<dd>
-								<a href="page/insert">添加页面</a>
+								<a href="page/add">添加页面</a>
 							</dd>
 						</dl></li>
 					<li class="layui-nav-item"><a class="" href="javascript:;">
@@ -102,7 +103,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 								<a href="link">全部链接</a>
 							</dd>
 							<dd>
-								<a href="link/insert">添加链接</a>
+								<a href="link/add">添加链接</a>
 							</dd>
 						</dl></li>
 					<li class="layui-nav-item"><a href="javascript:;">公告</a>
@@ -111,10 +112,10 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 								<a href="notice">全部公告</a>
 							</dd>
 							<dd>
-								<a href="notice/insert">添加公告</a>
+								<a href="notice/add">添加公告</a>
 							</dd>
 						</dl></li>
-					<li class="layui-nav-item"><a href="/admin/comment"> 评论 </a></li>
+					<li class="layui-nav-item"><a href="comment"> 评论 </a></li>
 					<li class="layui-nav-item"><a class="" href="javascript:;">
 							用户 </a>
 						<dl class="layui-nav-child">

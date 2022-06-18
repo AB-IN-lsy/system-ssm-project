@@ -16,7 +16,10 @@ public interface ArticleService {
 
 	PageInfo<Article> getPageArticleList(Integer pageIndex, Integer pageSize);
 
-	void add(Article article);
+	void addArticle(Article article);
 
 	Integer countArticleByTagId(Integer tagId);
+
+	Integer countArticleByCategoryId(Integer categoryId);
+
 }

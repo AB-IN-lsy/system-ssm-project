@@ -12,7 +12,7 @@ public interface TagMapper {
 
 	Tag getTagById(Integer tagId);
 
-	void updateTag(Tag tag);
+	void editTag(Tag tag);
 
 	void deleteTag(Integer tagId);
 

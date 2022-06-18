@@ -15,7 +15,7 @@
 		select * from tag where tag_id=#{tagId}
 	</select>
 	
-	<update id="updateTag">
+	<update id="editTag">
 		update tag set tag_name=#{tagName}, tag_description=#{tagDescription} where tag_id=#{tagId};
 	</update>
 	

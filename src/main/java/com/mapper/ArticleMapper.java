@@ -70,7 +70,14 @@ public interface ArticleMapper {
 	 * @param tagId
 	 * @return
 	 */
+	Integer countArticleByTagId(Integer tagId);
 
-	Integer countArticleBytagId(Integer tagId);
+	/**
+	 * 根据分类ID查询文章数目
+	 * 
+	 * @param tagId
+	 * @return
+	 */
+	Integer countArticleByCategoryId(Integer categoryId);
 
 }

@@ -10,4 +10,12 @@ public interface CategoryMapper {
 
 	List<Category> listCategoryByParentId(Integer parentId);
 
+	void addCategory(Category category);
+
+	void deleteCategory(Integer categoryId);
+
+	Category getCategoryById(Integer categoryId);
+
+	void editCategory(Category category);
+
 }
