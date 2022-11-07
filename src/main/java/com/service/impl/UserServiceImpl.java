@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.entity.User;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+import com.mapper.ArticleMapper;
 import com.mapper.UserMapper;
 import com.service.UserService;
 
@@ -16,6 +15,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired // 还有这个注解,它的作用是让spring帮我们注入依赖对象
 	private UserMapper userMapper;
+
+	@Autowired
+	private ArticleMapper articleMapper;
 
 	public User loginByNameOrEmail(String s) {
 		return userMapper.loginByNameOrEmail(s);
@@ -28,16 +30,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public PageInfo<User> getPageUserList(Integer pageIndex, Integer pageSize) {
-		PageHelper.startPage(pageIndex, pageSize);
+	public List<User> listUser() {
 
-		List<User> userList = userMapper.findAll();
-
-		return new PageInfo<User>(userList);
+		List<User> userList = userMapper.listUser();
+		for (User u : userList) {
+			u.setArticleCount(articleMapper.countArticleByUserId(u.getUserId()));
+		}
+		return userList;
 	}
 
 	@Override
 	public User getUserById(Integer userId) {
 		return userMapper.getUserById(userId);
 	}
+
 }

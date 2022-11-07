@@ -27,7 +27,7 @@ public class ArticleSericeImpl implements ArticleService {
 		PageHelper.startPage(pageIndex, pageSize); // 底层动态代理，对底层查询的结果进行代理，把查询指令进行了修改，将原本指令加上了limit语句
 		// 属于真分页，就是要多少条，查多少条
 
-		List<Article> articleList = articleMapper.findAll();
+		List<Article> articleList = articleMapper.listArticle();
 
 		// 对每个文章,都要把它对应的大分类,小分类信息查出来
 		for (Article a : articleList) {

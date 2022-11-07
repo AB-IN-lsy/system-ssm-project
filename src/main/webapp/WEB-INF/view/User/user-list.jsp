@@ -6,7 +6,7 @@
 <rapid:override name="frame-content">
 	<blockquote class="layui-elem-quote">
 		<span class="layui-breadcrumb" lay-separator="/"> <a
-			href="/admin">首页</a> <a><cite>用户列表</cite></a>
+			href="user/index">首页</a> <a><cite>用户列表</cite></a>
 		</span>
 	</blockquote>
 
@@ -32,7 +32,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach  var="u" items="${pageInfo.list}">
+			<c:forEach  var="u" items="${userList}">
 				<tr>
 					<td>
 						<img src="user/photo/${u.userId }" width="48" height="48"> 

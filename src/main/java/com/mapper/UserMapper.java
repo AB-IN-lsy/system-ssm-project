@@ -20,7 +20,7 @@ public interface UserMapper {
 	 */
 	void addUser(User user);
 
-	List<User> findAll();
-
 	User getUserById(Integer userId);
+
+	List<User> listUser();
 }

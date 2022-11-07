@@ -29,7 +29,7 @@
 	</select>
 	
 	<!-- 查询所有的文章 -->
-	<select id="findAll" resultType="Article">
+	<select id="listArticle" resultType="Article">
 		select
 		<include refid="cols" />
 		from article order by article_order desc,article_id desc
@@ -81,5 +81,10 @@
 	<!-- 根据分类ID查询文章数目 -->
 	<select id="countArticleByCategoryId" resultType="Integer">
 		select count(*) from article_category_ref where category_id=#{categoryId} 
+	</select>
+	
+	<!-- 根据用户ID查询文章数目 -->
+	<select id="countArticleByUserId" resultType="Integer">
+		select count(*) from article where article_user_id=#{userId} 
 	</select>
 </mapper>

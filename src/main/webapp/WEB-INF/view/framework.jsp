@@ -149,8 +149,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
 		<div class="layui-footer">
 			<!-- 底部固定区域 -->
-			? 这里展示一些提示性信息 <a href="#" target="_blank">其他导航</a> / <a href="#"
-				target="_blank">其他导航</a>
+			Copyright © 2022 AB-IN All Rights Reserved
+			<a href="https://www.ab-in.cn/" target="_blank">个人网址</a> / 
+			<a href="https://blog.ab-in.cn/" target="_blank">个人博客</a>
 		</div>
 	</div>
 

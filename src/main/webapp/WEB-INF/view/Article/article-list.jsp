@@ -7,7 +7,7 @@
 <rapid:override name="frame-content">
 	<blockquote class="layui-elem-quote">
 		<span class="layui-breadcrumb" lay-separator="/"> <a
-			href="/admin">首页</a> <a><cite>文章列表</cite></a>
+			href="user/index">首页</a> <a><cite>文章列表</cite></a>
 		</span>
 	</blockquote>
 

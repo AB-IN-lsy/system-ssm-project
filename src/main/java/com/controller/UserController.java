@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,13 +16,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.entity.Article;
 import com.entity.Comment;
 import com.entity.User;
-import com.github.pagehelper.PageInfo;
 import com.service.ArticleService;
 import com.service.CommentService;
 import com.service.UserService;
@@ -39,23 +38,16 @@ public class UserController {
 	private CommentService commentService;
 
 	/**
-	 * 分页查询用户信息
+	 * 全部用户
 	 * 
-	 * @param pageIndex 用于分页,表示当前是第几页,默认是1
-	 * @param pageSize  用于分页,表示每页有多少条数据,默认是10
-	 * @param m
-	 * @return 返回的是 PageInfo类型的数据,它里面含有分页信息,和具体的查出来的数据
+	 * @param map
+	 * @return
 	 */
 	@RequestMapping(value = "")
-	public String index(@RequestParam(required = false, defaultValue = "1") Integer pageIndex,
-			@RequestParam(required = false, defaultValue = "5") Integer pageSize, ModelMap m) {
-
-		// 分页查询文章相关的数据,放到作用域中
-		PageInfo<User> pageInfo = userService.getPageUserList(pageIndex, pageSize);
-
-		m.put("pageUrlPrefix", "user?pageIndex"); // 把前缀传给分页的页面
-		m.put("pageInfo", pageInfo);
-		return "/User/user-list";
+	public String index(ModelMap map) {
+		List<User> userList = userService.listUser();
+		map.put("userList", userList);
+		return "User/user-list";
 	}
 
 	/**
@@ -109,11 +101,10 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(HttpServletRequest request) {
+	public String login(HttpServletRequest request, HttpServletResponse response) {
 		String userNameOrEmail = request.getParameter("userName");
 		String userPass = request.getParameter("userPass");
-
-		// String rememberMe=request.getParameter("rememberMe");
+		String rememberMe = request.getParameter("rememberMe");
 
 		User user = userService.loginByNameOrEmail(userNameOrEmail);
 		if (user == null) {
@@ -129,7 +120,18 @@ public class UserController {
 			// 用户登录成功能后,把用户相关的信息放到 session中,方便以后使用
 			request.getSession().setAttribute("session_user", user);
 
-			// 如果用户勾选了rememberMe , 添加cookie相关的信息
+			if (rememberMe != null) {
+				// 创建两个Cookie对象
+				Cookie nameCookie = new Cookie("username", userNameOrEmail);
+				// 设置Cookie的有效期为3天
+				nameCookie.setMaxAge(60 * 60 * 24 * 3);
+				Cookie pwdCookie = new Cookie("password", userPass);
+				pwdCookie.setMaxAge(60 * 60 * 24 * 3);
+				response.addCookie(nameCookie);
+				response.addCookie(pwdCookie);
+
+			}
+
 			// 更新用户的最后登录时间
 			// 更新用户的最后登录ip
 			user.setUserLastLoginTime(new Date());

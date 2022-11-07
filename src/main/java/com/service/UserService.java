@@ -1,7 +1,8 @@
 package com.service;
 
+import java.util.List;
+
 import com.entity.User;
-import com.github.pagehelper.PageInfo;
 
 /**
  * 业务层接口
@@ -23,7 +24,7 @@ public interface UserService {
 
 	void addUser(User user);
 
-	PageInfo<User> getPageUserList(Integer pageIndex, Integer pageSize);
-
 	User getUserById(Integer userId);
+
+	List<User> listUser();
 }
